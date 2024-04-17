@@ -1,0 +1,155 @@
+# ip-10
+program 2
+<?php
+
+
+function isPalindrome($number)
+{
+    $reverse = 0;
+    $temp = $number;
+
+    while ($temp != 0) {
+        $remainder = $temp % 10;
+        $reverse = $reverse * 10 + $remainder;
+        $temp = (int)($temp / 10);
+    }
+
+    if ($number == $reverse) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+$number = 12321; 
+if (isPalindrome($number)) {
+    echo $number . " is a palindrome.";
+} else {
+    echo $number . " is not a palindrome.";
+}
+?>
+
+program 3
+<?php
+
+class OnlineCourse
+{
+    private $title;
+    private $instructor;
+    private $duration;
+    private $price;
+    private $students = [];
+
+   
+    public function __construct($title, $instructor, $duration, $price)
+    {
+        $this->title = $title;
+        $this->instructor = $instructor;
+        $this->duration = $duration;
+        $this->price = $price;
+    }
+
+    
+    public function enrollStudent($studentName)
+    {
+        $this->students[] = $studentName;
+        echo "Enrolled $studentName in the course '$this->title'.\n";
+    }
+
+   
+    public function accessCourseMaterials()
+    {
+        echo "You can access the course materials for '$this->title' now.\n";
+    }
+
+ 
+    public function trackStudentProgress($studentName, $progress)
+    {
+        if (in_array($studentName, $this->students)) {
+            echo "Student $studentName has progressed $progress% in the course '$this->title'.\n";
+        } else {
+            echo "Student $studentName is not enrolled in the course '$this->title'.\n";
+        }
+    }
+
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function getInstructor()
+    {
+        return $this->instructor;
+    }
+
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+}
+
+// Example usage
+$course = new OnlineCourse("PHP Basics", "John Doe", "4 weeks", "$50");
+
+$course->enrollStudent("Alice");
+$course->enrollStudent("Bob");
+
+$course->accessCourseMaterials();
+
+$course->trackStudentProgress("Alice", 25);
+$course->trackStudentProgress("Bob", 50);
+$course->trackStudentProgress("Charlie", 10);
+
+program 1
+<?php
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $weight = $_POST["weight"];
+    $height = $_POST["height"];
+
+    
+    if (!empty($weight) && !empty($height) && is_numeric($weight) && is_numeric($height) && $weight > 0 && $height > 0) {
+        // Calculate BMI
+        $bmi = calculateBMI($weight, $height);
+
+       
+        $bmiCategory = getBMICategory($bmi);
+
+       
+        echo "Your BMI is: " . round($bmi, 2) . "<br>";
+        echo "BMI Category: " . $bmiCategory;
+    } else {
+        echo "Please enter valid weight and height values.";
+    }
+}
+
+
+function calculateBMI($weight, $height)
+{
+    return $weight / ($height * $height);
+}
+
+
+function getBMICategory($bmi)
+{
+    if ($bmi < 18.5) {
+        return "Underweight";
+    } elseif ($bmi >= 18.5 && $bmi < 25) {
+        return "Normal weight";
+    } elseif ($bmi >= 25 && $bmi < 30) {
+        return "Overweight";
+    } else {
+        return "Obese";
+    }
+}
+
+?>
